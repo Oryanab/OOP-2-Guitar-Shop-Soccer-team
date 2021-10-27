@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js" defer></script>
     <title>Document</title>
   </head>
   <body>
@@ -13,15 +15,23 @@
       <div class="form-style-2-heading">Team Manager Login</div>
       <form action="" method="post">
         <label for="firstname"
-          ><span>First Name <span class="required">*</span></span
+          ><span>Manager Name <span class="required">*</span></span
           ><input type="text" class="input-field" name="firstname" value=""
         /></label>
         <label>
           <span></span>
           <input type="submit" value="Submit" />
-          <button>Sign-Up</button>
+          <button id="sign-up">Sign-Up</button>
         </label>
       </form>
+    </div>
+    <div id="signed-in" hidden>
+      <h1
+        style="margin: 10px; font-family: sans-serif"
+        id="sign-in-manager-title"
+      >
+        Hello, Manager
+      </h1>
     </div>
     <!-- sign-up / log-in manager section -->
     <!-- sign up a player section -->
@@ -221,7 +231,5 @@
       </form>
     </div>
     <!-- update / Delete a player -->
-
-    <script src="index.js"></script>
   </body>
 </html>

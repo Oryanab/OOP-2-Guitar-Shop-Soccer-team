@@ -29,11 +29,11 @@ function saveDataBase(dataBaseJson) {
     get manager soccerteam
 */
 managerRouter.get("/:manager", (req, res) => {
-  try {
-    res.json(returnDataBase()[req.params.manager]);
-  } catch (e) {
-    res.sendStatus(404, { err: "page not found" });
-  }
+  //   try {
+  res.json(returnDataBase()[req.params.manager]);
+  //   } catch (e) {
+  //     res.sendStatus(404, { err: "page not found" });
+  //   }
 });
 
 /*

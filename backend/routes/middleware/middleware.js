@@ -45,7 +45,25 @@ function checkValidManger(req, res, next) {
 }
 
 /*
-    middle ware for player name: local middleware
+    middle ware if player already exist for post
+*/
+
+function checkAlreadyExistPlayer(req, res, next) {
+  let dataBaseJson = returnDataBase();
+  if (
+    !Object.keys(dataBaseJson[req.headers.managername]).includes(
+      req.body.firstname
+    )
+  ) {
+    next();
+  } else {
+    res.send(403, {
+      error: "hi, player already exist",
+    });
+  }
+}
+/*
+    middle ware if player not exist for put
 */
 
 function checkExistPlayer(req, res, next) {
@@ -58,7 +76,7 @@ function checkExistPlayer(req, res, next) {
     next();
   } else {
     res.send(404, {
-      error: "hi, we could not find the player/ or player already exist",
+      error: "hi, sorry we couldnt find this player, make sure he signed up",
     });
   }
 }
@@ -83,4 +101,5 @@ module.exports = {
   checkValidManger,
   checkExistPlayer,
   checkPlayerAtterExist,
+  checkAlreadyExistPlayer,
 };

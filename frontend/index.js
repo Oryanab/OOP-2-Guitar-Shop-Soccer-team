@@ -12,6 +12,8 @@ function removePlayerFields() {
   goalkeeperDiv.style.display = "block";
   playerDiv.style.display = "none";
 }
+function updatePlayerFields() {}
+function updateGoalkeeperFields() {}
 
 // document.querySelector("#form-submit").addEventListener("click", (e) => {
 //   e.preventDefault();
@@ -46,3 +48,36 @@ document.querySelector("#form-submit").addEventListener("click", (e) => {
   ).value;
   console.log(getSwitch);
 });
+
+async function addPlayer() {
+  let postTestUrl = "http://localhost:8080/team/player";
+  const postTest = await axios({
+    method: "POST",
+    url: postTestUrl,
+    data: {
+      firstname: "loolo",
+      lastname: "abergel",
+      salary: 500,
+      age: 22,
+      id: 1,
+      strongleg: "right",
+      position: "ST",
+      celebration: "win",
+    },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      managername: "oryan",
+    },
+  });
+}
+addPlayer();
+
+async function testConnection() {
+  let getUrl = "http://localhost:8080/manager/oryan";
+
+  const testTest = await axios.get(getUrl);
+  console.log(testTest["data"]);
+}
+
+testConnection();
