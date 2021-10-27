@@ -42,7 +42,7 @@ managerRouter.post("/add", (req, res) => {
 });
 
 /*
-  remove a manager
+     remove a manager
 */
 managerRouter.delete("/remove", (req, res) => {
   let dataBaseJson = returnDataBase();

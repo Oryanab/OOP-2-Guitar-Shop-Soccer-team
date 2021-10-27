@@ -31,29 +31,12 @@ requestRoutes.get("/", (req, res) => {
   res.json(returnDataBase());
 });
 
-// /*
-//     get manager soccerteam
-// */
-// requestRoutes.get("/:manager", (req, res) => {
-//   res.json(returnDataBase()[req.params.manager]);
-// });
-
 /*
     get player card details
 */
 requestRoutes.get("/:manager/:firstname", (req, res) => {
   res.json(returnDataBase()[req.params.manager][req.params.firstname]);
 });
-
-// /*
-//     add a manager
-// */
-// requestRoutes.post("/manager", (req, res) => {
-//   let dataBaseJson = returnDataBase();
-//   dataBaseJson[req.body.managername] = {};
-//   fs.writeFileSync("database.json", Buffer.from(JSON.stringify(dataBaseJson)));
-//   res.json(dataBaseJson);
-// });
 
 /*
     add soccer player 
@@ -98,7 +81,7 @@ requestRoutes.post("/goalkeeper", (req, res) => {
 });
 
 /*
-  edit a player
+    edit a player
 */
 requestRoutes.put("update/:detail/player", (req, res) => {
   let dataBaseJson = returnDataBase();
@@ -109,7 +92,7 @@ requestRoutes.put("update/:detail/player", (req, res) => {
 });
 
 /*
-  edit a goalkeeper
+    edit a goalkeeper
 */
 requestRoutes.put("update/:detail/goalkeeper", (req, res) => {
   let dataBaseJson = returnDataBase();
@@ -119,33 +102,13 @@ requestRoutes.put("update/:detail/goalkeeper", (req, res) => {
   res.json(dataBaseJson);
 });
 
-// /*
-//   edit a goalkeeper
-// */
-// requestRoutes.put("/:detail/goalkeeper", (req, res) => {
-//   let dataBaseJson = returnDataBase();
-//   let teamManager = req.headers.managername;
-//   let playerName = req.body.firstname;
-//   let selectedDetail = req.params.detail;
-//   let newDetail = req.body.newDetail;
-//   dataBaseJson.teamManager.playerName.selectedDetail = newDetail;
-// });
 /*
-  remove a player
+    remove a player
 */
 requestRoutes.delete("/remove", (req, res) => {
   let dataBaseJson = returnDataBase();
   delete dataBaseJson[req.headers.managername][req.body.removedplayer];
   saveDataBase(dataBaseJson);
 });
-
-// /*
-//   remove a manager
-// */
-// requestRoutes.delete("/remove", (req, res) => {
-//   let dataBaseJson = returnDataBase();
-//   delete dataBaseJson[req.headers.managername];
-//   saveDataBase(dataBaseJson);
-// });
 
 module.exports = requestRoutes;
