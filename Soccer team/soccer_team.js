@@ -1,7 +1,9 @@
 "use strict";
-
 const moment = require("moment");
 
+/*
+  Person Class
+*/
 class Person {
   #id;
   constructor(firstName, sureName, salary, age, id) {
@@ -25,10 +27,9 @@ class Person {
   }
 }
 
-// let personal = new Person("firstName", "sureName", 22000000, 21, 10);
-// personal.newincome = 250;
-// console.log(personal.Raise);
-
+/*
+  Player Class
+*/
 class Player extends Person {
   #id;
   constructor(
@@ -47,6 +48,21 @@ class Player extends Person {
     this.celebrationSentence = celebrationSentence;
   }
 
+  // access all propeties
+  get playerData() {
+    return new Player(
+      this.firstName,
+      this.sureName,
+      this.salary,
+      this.age,
+      (this.#id = this.showId()),
+      this.strongLeg,
+      this.position,
+      this.celebrationSentence
+    );
+  }
+
+  // in case a player scored
   goalClebration() {
     this.salary = this.Raise;
     console.log(`your new income ${this.salary}`);
@@ -57,24 +73,26 @@ class Player extends Person {
     return this.celebrationSentence;
   }
 
-  set CelebSent(newSent) {
+  set salaryUpdate(newsalary) {
+    this.salary = newsalary;
+  }
+
+  set ageUpdate(newAge) {
+    this.age = newAge;
+  }
+
+  set positionUpdate(newPosition) {
+    this.position = newPosition;
+  }
+
+  set celebrationSentenceUpdate(newSent) {
     this.celebrationSentence = newSent;
   }
 }
 
-// let zehavi = new Player(
-//   "firstName",
-//   "sureName",
-//   240,
-//   23,
-//   22,
-//   "strongLeg",
-//   "position",
-//   "helllyeaa"
-// );
-
-// console.log(zehavi.goalClebration());
-
+/*
+  GoalKeeper Class
+*/
 class GoalKeepr extends Person {
   #id;
   constructor(
@@ -118,5 +136,6 @@ let noam = new GoalKeepr(
   moment().format("MMMM Do YYYY, h:mm:ss a")
 );
 
-// console.log(noam);
-console.log(noam.concededAGoal());
+let nina = new Player("nina", "bolob", 22, 22, 22, "left", "LM", "dont");
+console.log((nina.salaryUpdate = 33));
+console.log(nina);

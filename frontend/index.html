@@ -8,54 +8,220 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="playerbox">
-      <h2>Sign Up A Player</h2>
-      <form>
-        <div class="user-box">
-          <input type="text" name="" required="" />
-          <label>firstName</label>
-        </div>
-        <div class="user-box">
-          <input type="password" name="" required="" />
-          <label>sureName</label>
-        </div>
-        <div class="user-box">
-          <input type="password" name="" required="" />
-          <label>salary</label>
-        </div>
-        <div class="user-box">
-          <input type="password" name="" required="" />
-          <label>age</label>
-        </div>
-        <div class="user-box">
-          <input type="password" name="" required="" />
-          <label>id</label>
-        </div>
-        <h2>Player/Goalkeeper?</h2>
-        <div class="switch-field">
-          <input
-            type="radio"
-            id="radio-one"
-            name="switch-one"
-            value="yes"
-            checked
-          />
-          <label for="radio-one">Player</label>
-          <input type="radio" id="radio-two" name="switch-one" value="no" />
-          <label for="radio-two">GoalKeeper</label>
-        </div>
-        <a href="#">
+    <!-- sign-up / log-in manager section -->
+    <div class="form-style-2" id="manager-signup">
+      <div class="form-style-2-heading">Team Manager Login</div>
+      <form action="" method="post">
+        <label for="firstname"
+          ><span>First Name <span class="required">*</span></span
+          ><input type="text" class="input-field" name="firstname" value=""
+        /></label>
+        <label>
           <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </a>
+          <input type="submit" value="Submit" />
+          <button>Sign-Up</button>
+        </label>
       </form>
     </div>
-    <!-- space -->
-    <div class="login-box">
-      <h2>YourTeam</h2>
+    <!-- sign-up / log-in manager section -->
+    <!-- sign up a player section -->
+    <div class="form-style-2" id="player-signup">
+      <div class="form-style-2-heading">Provide your information</div>
+      <form action="" method="post">
+        <label for="firstname"
+          ><span>First Name <span class="required">*</span></span
+          ><input
+            id="form-name"
+            type="text"
+            class="input-field"
+            name="firstname"
+            value=""
+        /></label>
+        <label for="lastname"
+          ><span>Last Name <span class="required">*</span></span
+          ><input
+            id="form-last"
+            type="text"
+            class="input-field"
+            name="lastname"
+            value=""
+        /></label>
+        <label for="salary"
+          ><span>Salary <span class="required">*</span></span
+          ><input
+            id="form-salary"
+            type="number"
+            class="input-field"
+            name="salary"
+            value=""
+        /></label>
+        <label for="age"
+          ><span>Age <span class="required">*</span></span
+          ><input
+            id="form-age"
+            type="number"
+            class="input-field"
+            name="age"
+            value=""
+        /></label>
+        <label for="id"
+          ><span>ID <span class="required">*</span></span
+          ><input
+            id="form-id"
+            type="number"
+            class="input-field"
+            name="id"
+            value=""
+        /></label>
+        <label for="goliorplayer"
+          ><span>GoalKeeper Or Player <span class="required">*</span></span>
+          <div class="switch-field">
+            <input
+              type="radio"
+              id="radio-one"
+              name="switch-one"
+              value="goalkeeper"
+              onclick="removePlayerFields()"
+              checked
+            />
+            <label for="radio-one">Goalkeeper</label>
+            <input
+              type="radio"
+              id="radio-two"
+              name="switch-one"
+              value="player"
+              onclick="removeGoliFields()"
+            />
+            <label for="radio-two">Player</label>
+          </div>
+        </label>
+
+        <div id="playerDiv" hidden>
+          <label for="strongleg"
+            ><span>Select Strong Leg</span
+            ><select id="form-strongleg" name="strongleg" class="select-field">
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select></label
+          >
+          <label for="position"
+            ><span>Position</span
+            ><select id="form-position" name="position" class="select-field">
+              <option value="CB">CB</option>
+              <option value="LB">LB</option>
+              <option value="RB">RB</option>
+              <option value="CM">CM</option>
+              <option value="RM">RM</option>
+              <option value="LM">LM</option>
+              <option value="ST">ST</option>
+              <option value="CAM">CAM</option>
+            </select></label
+          >
+          <label for="celebration"
+            ><span>celebration Sentence<span class="required">*</span></span
+            ><input
+              id="form-celebration"
+              type="text"
+              class="input-field"
+              name="celebration"
+              value=""
+          /></label>
+        </div>
+
+        <div id="golidiv">
+          <label for="islefthanded"
+            ><span>Left Handed</span
+            ><select
+              id="form-islefthanded"
+              name="islefthanded"
+              class="select-field"
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></label
+          >
+          <label for="lastGoalConced"
+            ><span>Last Goal Conceded<span class="required">*</span></span
+            ><input
+              id="form-lastGoalConced"
+              type="date"
+              class="input-field"
+              name="lastGoalConced"
+              value=""
+          /></label>
+        </div>
+        <label
+          ><span> </span><input id="form-submit" type="submit" value="Submit"
+        /></label>
+      </form>
     </div>
+    <!-- sign up a player section -->
+    <!-- update / Delete a player -->
+    <div class="form-style-2" id="player-update">
+      <div class="form-style-2-heading">Update/Remove A Player</div>
+      <form action="" method="post">
+        <label for="update-remove"
+          ><span>Update/Remove</span
+          ><select
+            id="form-update-remove"
+            name="update-remove"
+            class="select-field"
+          >
+            <option value="update">update</option>
+            <option value="remove">remove</option>
+          </select></label
+        >
+        <label for="select-player"
+          ><span>Choose A Player</span
+          ><select
+            id="select-player-field"
+            name="select-player"
+            class="select-field"
+          >
+            <option value="update">Choose A Player</option>
+          </select></label
+        >
+
+        <div id="player-atter-section" hidden>
+          <label for="select-atter"
+            ><span>Choose a detail to update</span
+            ><select
+              id="player-atter-field"
+              name="select-atter"
+              class="select-field"
+            >
+              <option value="salary">Salary</option>
+              <option value="age">Age</option>
+              <option value="id">ID</option>
+              <option value="position">position</option>
+              <option value="celebrationSentence">celebration Sentence</option>
+            </select></label
+          >
+        </div>
+        <div id="goalkeeper-atter-section" hidden>
+          <label for="select-atter"
+            ><span>Choose a detail to update</span
+            ><select
+              id="goalkeeper-atter-field"
+              name="select-atter"
+              class="select-field"
+            >
+              <option value="salary">Salary</option>
+              <option value="age">Age</option>
+              <option value="id">ID</option>
+              <option value="lastGoalConceded">Conceded a goal today</option>
+            </select></label
+          >
+        </div>
+
+        <label>
+          <span></span>
+          <input type="button" value="Submit" />
+        </label>
+      </form>
+    </div>
+    <!-- update / Delete a player -->
+
+    <script src="index.js"></script>
   </body>
 </html>

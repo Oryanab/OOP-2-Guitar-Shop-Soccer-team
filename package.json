@@ -1,0 +1,29 @@
+{
+  "name": "OOP-2-Guitar-Shop-Soccer-team",
+  "version": "1.0.0",
+  "description": "- Class inheritance and the key word \"extends\"\r - calling a method with in method in a class\r - key word \"super\"\r - getters\r - seters\r - getters\r - static methods\r - private\r - public",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "scripts": {
+    "dev": "nodemon ./backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oryanab/OOP-2-Guitar-Shop-Soccer-team.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oryanab/OOP-2-Guitar-Shop-Soccer-team/issues"
+  },
+  "homepage": "https://github.com/Oryanab/OOP-2-Guitar-Shop-Soccer-team#readme"
+}

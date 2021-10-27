@@ -1,0 +1,53 @@
+# POST http://localhost:8080/user/manager
+# Content-Type: application/json
+
+# { 
+#     "managername": "oryan"
+# }
+
+# POST http://localhost:8080/team/player
+# Content-Type: application/json
+# managername : oryan
+
+# { 
+#     "firstname": "clas",
+#     "lastname": "abergel",
+#     "salary": 500,
+#     "age": 22,
+#     "id": 1,
+#     "strongleg": "right",
+#     "position": "ST",
+#     "celebration": "win"
+# }
+
+# PUT http://localhost:8080/team/salary/player
+# Content-Type: application/json
+# managername : oryan
+
+# { 
+#     "firstname": "clas",
+#     "newdetail": 200
+# }
+
+
+# POST http://localhost:8080/team/goalkeeper
+# Content-Type: application/json
+# managername : oryan
+
+# { 
+#     "firstname": "bb",
+#     "lastname": "abergel",
+#     "salary": 500,
+#     "age": 22,
+#     "id": 1,
+#     "islefthanded": true,
+#     "lastgoalconceded": "now"
+# }
+
+POST http://localhost:8080/manager/add
+Content-Type: application/json 
+
+{ 
+    "managername": "newOryan"
+}
+
