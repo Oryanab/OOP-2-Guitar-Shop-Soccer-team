@@ -3,6 +3,7 @@
 const express = require("express");
 const requestRoutes = express.Router();
 const soccerClass = require("./soccer_class");
+const errorHandler = require("./middleware/middleware");
 const fs = require("fs");
 const path = require("path");
 
@@ -28,20 +29,34 @@ function saveDataBase(dataBaseJson) {
     get soccer team at url: /user
 */
 requestRoutes.get("/", (req, res) => {
-  res.json(returnDataBase());
+  try {
+    res.json(returnDataBase());
+  } catch (e) {
+    res.sendStatus(404, { err: "page not found" });
+  }
 });
 
 /*
     get player card details
 */
 requestRoutes.get("/:manager/:firstname", (req, res) => {
-  res.json(returnDataBase()[req.params.manager][req.params.firstname]);
+  try {
+    res.json(returnDataBase()[req.params.manager][req.params.firstname]);
+  } catch (e) {
+    res.sendStatus(404, { err: "page not found" });
+  }
 });
+
+/*
+    middleWare sections
+*/
+requestRoutes.use(errorHandler.checkManagerNameInHeader);
+requestRoutes.use(errorHandler.checkValidManger);
 
 /*
     add soccer player 
 */
-requestRoutes.post("/player", (req, res) => {
+requestRoutes.post("/player", errorHandler.checkExistPlayer, (req, res) => {
   let dataBaseJson = returnDataBase();
   // build player json:
   let playerJson = new soccerClass.Player(
@@ -63,7 +78,7 @@ requestRoutes.post("/player", (req, res) => {
 /*
     add soccer goalkeeper 
 */
-requestRoutes.post("/goalkeeper", (req, res) => {
+requestRoutes.post("/goalkeeper", errorHandler.checkExistPlayer, (req, res) => {
   let dataBaseJson = returnDataBase();
   let playerJson = new soccerClass.GoalKeepr(
     req.body.firstname,
@@ -83,29 +98,41 @@ requestRoutes.post("/goalkeeper", (req, res) => {
 /*
     edit a player
 */
-requestRoutes.put("update/:detail/player", (req, res) => {
-  let dataBaseJson = returnDataBase();
-  dataBaseJson[req.headers.managername][req.body.firstname][req.params.detail] =
-    req.body.newdetail;
-  saveDataBase(dataBaseJson);
-  res.json(dataBaseJson);
-});
+requestRoutes.put(
+  "update/:detail/player",
+  errorHandler.checkExistPlayer,
+  errorHandler.checkPlayerAtterExist,
+  (req, res) => {
+    let dataBaseJson = returnDataBase();
+    dataBaseJson[req.headers.managername][req.body.firstname][
+      req.params.detail
+    ] = req.body.newdetail;
+    saveDataBase(dataBaseJson);
+    res.json(dataBaseJson);
+  }
+);
 
 /*
     edit a goalkeeper
 */
-requestRoutes.put("update/:detail/goalkeeper", (req, res) => {
-  let dataBaseJson = returnDataBase();
-  dataBaseJson[req.headers.managername][req.body.firstname][req.params.detail] =
-    req.body.newdetail;
-  saveDataBase(dataBaseJson);
-  res.json(dataBaseJson);
-});
+requestRoutes.put(
+  "update/:detail/goalkeeper",
+  errorHandler.checkExistPlayer,
+  errorHandler.checkPlayerAtterExist,
+  (req, res) => {
+    let dataBaseJson = returnDataBase();
+    dataBaseJson[req.headers.managername][req.body.firstname][
+      req.params.detail
+    ] = req.body.newdetail;
+    saveDataBase(dataBaseJson);
+    res.json(dataBaseJson);
+  }
+);
 
 /*
     remove a player
 */
-requestRoutes.delete("/remove", (req, res) => {
+requestRoutes.delete("/remove", errorHandler.checkExistPlayer, (req, res) => {
   let dataBaseJson = returnDataBase();
   delete dataBaseJson[req.headers.managername][req.body.removedplayer];
   saveDataBase(dataBaseJson);

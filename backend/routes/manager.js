@@ -3,6 +3,7 @@
 const express = require("express");
 const managerRouter = express.Router();
 const soccerClass = require("./soccer_class");
+const errorHandler = require("./middleware/middleware");
 const fs = require("fs");
 const path = require("path");
 
@@ -28,7 +29,11 @@ function saveDataBase(dataBaseJson) {
     get manager soccerteam
 */
 managerRouter.get("/:manager", (req, res) => {
-  res.json(returnDataBase()[req.params.manager]);
+  try {
+    res.json(returnDataBase()[req.params.manager]);
+  } catch (e) {
+    res.sendStatus(404, { err: "page not found" });
+  }
 });
 
 /*
@@ -40,6 +45,8 @@ managerRouter.post("/add", (req, res) => {
   fs.writeFileSync("database.json", Buffer.from(JSON.stringify(dataBaseJson)));
   res.json(dataBaseJson);
 });
+
+managerRouter.use(errorHandler.checkValidManger);
 
 /*
      remove a manager

@@ -7,7 +7,7 @@ const path = require("path");
 */
 function returnDataBase() {
   let dataBase = fs.readFileSync(
-    path.resolve(__dirname, "../../database.json")
+    path.resolve(__dirname, "../../../database.json")
   );
   let dataBaseJson = JSON.parse(dataBase.toString());
   return dataBaseJson;
@@ -21,6 +21,17 @@ function saveDataBase(dataBaseJson) {
 }
 
 /*
+    check if there a header with managername
+*/
+function checkManagerNameInHeader(req, res, next) {
+  if (req.headers.managername) {
+    next();
+  } else {
+    res.send(401, { error: "hi, headers must supply a manager name" });
+  }
+}
+
+/*
     middle ware for managername: Global middleware
 */
 
@@ -29,7 +40,7 @@ function checkValidManger(req, res, next) {
   if (Object.keys(dataBaseJson).includes(req.headers.managername)) {
     next();
   } else {
-    res.sendStatus(401);
+    res.send(401, { error: "hi, headers must sign up as a manager first" });
   }
 }
 
@@ -40,11 +51,15 @@ function checkValidManger(req, res, next) {
 function checkExistPlayer(req, res, next) {
   let dataBaseJson = returnDataBase();
   if (
-    Object.keys(dataBaseJson[req.headers.managername]) !== req.body.firstname
+    !Object.keys(dataBaseJson[req.headers.managername]).includes(
+      req.body.firstname
+    )
   ) {
     next();
   } else {
-    res.sendStatus(403);
+    res.send(404, {
+      error: "hi, we could not find the player/ or player already exist",
+    });
   }
 }
 
@@ -59,6 +74,13 @@ function checkPlayerAtterExist(req, res, next) {
   ) {
     next();
   } else {
-    res.sendStatus(401);
+    res.send(401, { error: "hi, we could not find the player attribute" });
   }
 }
+
+module.exports = {
+  checkManagerNameInHeader,
+  checkValidManger,
+  checkExistPlayer,
+  checkPlayerAtterExist,
+};
