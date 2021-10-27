@@ -137,5 +137,5 @@ let noam = new GoalKeepr(
 );
 
 let nina = new Player("nina", "bolob", 22, 22, 22, "left", "LM", "dont");
-console.log((nina.salaryUpdate = 33));
-console.log(nina);
+// console.log((nina.salaryUpdate = 33));
+// console.log(nina);
